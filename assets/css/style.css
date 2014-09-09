@@ -1,0 +1,192 @@
+/* -------- */
+/* General */
+/* -------------------------------------------------------------------------- */
+
+body {
+  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+  padding: 0;
+  margin: 0;
+  color: #333;
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 900px;
+  padding: 0 0 80px 0;
+  border-top: 4px solid #CCCDD3;
+}
+
+section {
+  padding: 60px 0;
+}
+
+h1 {
+  font-size: 3em;
+}
+
+/* -------- */
+/* Header */
+/* -------------------------------------------------------------------------- */
+
+header {
+  padding: 0 0 60px;
+}
+
+/* -------- */
+/* Table */
+/* -------------------------------------------------------------------------- */
+
+#map {
+  width: 100%;
+  height: 600px;
+  /*background: #CCCDD3;*/
+}
+
+/* Leaflet Overrides */
+
+.leaflet-popup-content li {
+  list-style:none;
+}
+
+.leaflet-popup-content {
+  width: 102px;
+}
+
+.leaflet-popup-content img {
+  width: 100px;
+  }
+
+/* -------- */
+/* Table */
+/* -------------------------------------------------------------------------- */
+
+table {
+  width: 100%;
+  border-spacing: 0;
+}
+
+.tHeader {
+  padding: 8px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.tHeader::after {
+  content: " \2193 \2191 ";
+  font-size: 10px;
+  padding-left: 3px;
+  cursor: pointer;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #f3f3f3;
+}
+
+td {
+  min-width: 140px;
+  vertical-align: top;
+  padding: 8px;
+}
+
+tr {
+  height: 50px;
+}
+
+/* Input */
+
+input {
+  border: none;
+  border-bottom: 1px solid #333;
+  margin: 10px 0px;
+  width: 200px;
+  font-size: 16px;
+  padding-bottom: 6px;
+}
+
+/* Pagination */
+
+#Pagination {
+  border-top: 4px solid #fafafa;
+  margin: 10px 0px;
+  padding-top: 10px;
+  display: inline-block;
+}
+
+#Pagination a {
+  cursor: pointer;
+  padding: 2px 4px;
+  background: #CCCDD3;
+  border-radius: 2px;
+  margin: 0 4px 0 8px;
+}
+
+#Pagination a + a {
+  margin: 0;
+}
+
+#Pagination a:hover {
+  background: #777;
+}
+
+#Pagination .no-pag {
+  cursor: default;
+  color: #acacac;
+  background: #E6E7EB;
+  border: none;
+}
+
+#Pagination .no-pag:hover {
+  color: #acacac;
+  background: #E6E7EB;
+}
+
+
+/* -------- */
+/* Footer */
+/* -------------------------------------------------------------------------- */
+
+footer {border-top: 4px solid #CCCDD3; padding: 20px 0; color: #CCCDD3;}
+
+/* -------- */
+/* Loading */
+/* -------------------------------------------------------------------------- */
+
+.loading {
+  text-align: center;
+  position: relative;
+  color: #CCCDD3;
+}
+
+/* Animate.css - http://daneden.me/animate Licensed under the MIT license */
+
+.animated {
+-webkit-animation-duration: 1s;
+animation-duration: 1s;
+-webkit-animation-fill-mode: both;
+animation-fill-mode: both;
+}
+
+@-webkit-keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+@keyframes flash {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+
+  25%, 75% {
+    opacity: 0;
+  }
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+}

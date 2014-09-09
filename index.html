@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Schools</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script type='text/javascript' src='https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'></script>
+    <link rel="shortcut icon" href="../favicon.png">
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <script type='text/javascript' src='assets/js/tabletop1.3.4.js'></script>
+    <script type='text/javascript' src='assets/js/sheetsee.js'></script>
+    <link rel='stylesheet' type='text/css' href='http://api.tiles.mapbox.com/mapbox.js/v1.0.0/mapbox.css'  />
+    <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Cool Header</h1>
+      </header>
+
+      <div id="map"><span class="loading animated flash">Loading...</span></div>
+
+      <section>
+        <input id="schoolTable_filter" type="text" placeholder="filter by.."></input>
+        <div id="schoolTable"><span class="loading animated flash">Loading...</span></div>
+      </section>
+
+      <footer>
+        <small>This is the footer.</small>
+      </footer>
+    </div>
+
+
+
+    <script id="schoolTable_template" type="text/html">
+      <table>
+        <tr><th class="tHeader">City</th><th class="tHeader">Place Name</th><th class="tHeader">Year</th><th class="tHeader">Image</th></tr>
+          {{#rows}}
+            <tr><td>{{city}}</td><td>{{placename}}</td><td>{{year}}</td><td>{{image}}</td></tr>
+          {{/rows}}
+      </table>
+    </script>
+
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        var URL = "0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc"
+        Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
+      })
+
+      function showInfo(data) {
+        // make map
+        var optionsJSON = ["placename", "photo-url"]
+        var template = "<ul><li><a href='{{photo-url}}' target='_blank'>"
+                     + "<img src='{{photo-url}}'></a></li>"
+                     + "<li><h4>{{placename}}</h4></li></ul>"
+        var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+        var map = Sheetsee.loadMap("map")
+        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
+        Sheetsee.addMarkerLayer(geoJSON, map, template)
+
+        // make table
+        var tableOptions = {
+              "data": data,
+              "pagination": 10,
+              "tableDiv": "#schoolTable",
+              "filterDiv": "#schoolTable_filter",
+              "templateID": "schoolTable_template"
+            }
+        Sheetsee.makeTable(tableOptions)
+        Sheetsee.initiateTableFilter(tableOptions)
+      }
+    </script>
+  </body>
+</html>
