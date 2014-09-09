@@ -34,25 +34,27 @@
 
     <script id="schoolTable_template" type="text/html">
       <table>
-        <tr><th class="tHeader">City</th><th class="tHeader">Place Name</th><th class="tHeader">Year</th><th class="tHeader">Image</th></tr>
+        <tr><th class="tHeader">School Name</th><th class="tHeader">Prog or Svc Category</th><th class="tHeader">Days and Times</th></tr>
           {{#rows}}
-            <tr><td>{{city}}</td><td>{{placename}}</td><td>{{year}}</td><td>{{image}}</td></tr>
+            <tr><td>{{schoolname}}</td><td>{{provorsvcategory}}</td><td>{{daysandtimes}}</td></tr>
           {{/rows}}
       </table>
     </script>
 
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
-        var URL = "0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc"
+        // old 0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc
+        var URL = "1UnDFxivpX65SvhBghu377zvUB3nZKypCJO5Gqswd0Ao"
         Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
       })
 
       function showInfo(data) {
+        console.log(data)
         // make map
-        var optionsJSON = ["placename", "photo-url"]
-        var template = "<ul><li><a href='{{photo-url}}' target='_blank'>"
-                     + "<img src='{{photo-url}}'></a></li>"
-                     + "<li><h4>{{placename}}</h4></li></ul>"
+        // data = data.map(function colorize(d) d.hexcolor = "#007BFF")
+        var optionsJSON = ["schoolname", "schooladdress"]
+        var template = "<ul><li><a href='{{schoolname}}' target='_blank'>"
+                     + "<li><h4>{{schooladdress}}</h4></li></ul>"
         var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
         var map = Sheetsee.loadMap("map")
         Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
