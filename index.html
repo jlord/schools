@@ -30,8 +30,6 @@
       </footer>
     </div>
 
-
-
     <script id="schoolTable_template" type="text/html">
       <table>
         <tr><th class="tHeader">School Name</th><th class="tHeader">Prog or Svc Category</th><th class="tHeader">Days and Times</th></tr>
@@ -43,21 +41,31 @@
 
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
-        // old 0Ao5u1U6KYND7dGN5QngweVJUWE16bTRob0d2a3dCbnc
+        // spreadsheet key from middle of URL
         var URL = "1UnDFxivpX65SvhBghu377zvUB3nZKypCJO5Gqswd0Ao"
+        // use Tabletop to go get the data from the spreadsheet
+        // then send the data to showInfo() and do the things
         Tabletop.init( { key: URL, callback: showInfo, simpleSheet: true } )
       })
 
       function showInfo(data) {
         console.log(data)
         // make map
-        // data = data.map(function colorize(d) d.hexcolor = "#007BFF")
+
+        // give each item a marker color
+        data = data.map(function colorize(d) {d.hexcolor = "#007BFF"; return d})
+        // items from column names to have in marker popups
         var optionsJSON = ["schoolname", "schooladdress"]
+        // html template for the marker popups
         var template = "<ul><li><a href='{{schoolname}}' target='_blank'>"
                      + "<li><h4>{{schooladdress}}</h4></li></ul>"
+        // turn the spreadsheet data into map data, geojson, using options
         var geoJSON = Sheetsee.createGeoJSON(data, optionsJSON)
+        // make a map in the html div with id 'map'
         var map = Sheetsee.loadMap("map")
-        Sheetsee.addTileLayer(map, 'examples.map-20v6611k')
+        // add a tilelayer (background) to the map
+        Sheetsee.addTileLayer(map, 'examples.map-i86nkdio')
+        // add the markers to the map and use template
         Sheetsee.addMarkerLayer(geoJSON, map, template)
 
         // make table
@@ -68,7 +76,9 @@
               "filterDiv": "#schoolTable_filter",
               "templateID": "schoolTable_template"
             }
+        // draw the table per our options
         Sheetsee.makeTable(tableOptions)
+        // make the filter/search area per our options
         Sheetsee.initiateTableFilter(tableOptions)
       }
     </script>
