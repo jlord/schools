@@ -34,7 +34,7 @@
       <table>
         <tr><th class="tHeader">School Name</th><th class="tHeader">Prog or Svc Category</th><th class="tHeader">Days and Times</th></tr>
           {{#rows}}
-            <tr><td>{{schoolname}}</td><td>{{progorsvccategory}}</td><td>{{daysandtimes}}</td></tr>
+            <tr id="row-{{rowNumber}}" class="row"><td>{{schoolname}}</td><td>{{progorsvccategory}}</td><td>{{daysandtimes}}</td></tr>
           {{/rows}}
       </table>
     </script>
@@ -80,6 +80,10 @@
         Sheetsee.makeTable(tableOptions)
         // make the filter/search area per our options
         Sheetsee.initiateTableFilter(tableOptions)
+
+        $('.row').on('click', function() {
+          $(this).addClass('selectedRow')
+        })
       }
     </script>
   </body>
